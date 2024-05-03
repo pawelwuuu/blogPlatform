@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title%></title>
+    <link rel="stylesheet" href="/css/general.css" type="text/css">
+</head>
+<body>
+<%- include('../partials/header') %>
+
+<div class="container">
+    <div class="post-header">
+        <h3><%= post.title %></h3>
+        <h4>Napisany przez <%= post.nickname%></h4>
+    </div>
+    <hr>
+    <p><%= post.content%></p>
+    <hr>
+    <h3>Komentarze</h3>
+    <div class="comments-section">
+        <% comments.forEach(comment => { %>
+            <div class="comment">
+                <p><%= comment.nickname%>: <%= comment.content%></p>
+            </div>
+        <% }) %>
+    </div>
+    <hr>
+    <h3>Dodaj komentarz</h3>
+    <form class="add-comment-form" method="POST" action="<%= post.id%>/addComment">
+        <label for="comment">Treść:</label> <br>
+        <input type="text" name="comment" id="comment" required> <br>
+        <button type="submit">Dodaj komentarz</button>
+    </form>
+
+    <% if(post.nickname === userName) { %>
+        <hr>
+        <h3>Edytuj post</h3>
+        <form class="edit-post-form" method="POST" action="<%= post.id%>/editPost">
+            <label for="title">Nowy tytuł:</label> <br>
+            <input type="text" name="title" id="title" required> <br>
+
+            <label for="content">Nowa treść:</label> <br>
+            <textarea rows="4" cols="50" name="content" id="content" required></textarea> <br>
+            <button type="submit">Edytuj post</button>
+        </form>
+
+        <div class="delete-post-btn">
+            <a href="<%= post.id%>/deletePost"><button>Usuń post</button></a>
+        </div>
+    <%}%>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

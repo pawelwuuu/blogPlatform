@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogownia</title>
+    <link rel="stylesheet" href="css/general.css" type="text/css">
+</head>
+<body>
+<% if(success) { %>
+    <script>
+        alert('<%= success %>');
+    </script>
+<% } %>
+
+<%- include('../partials/header') %>
+
+<div class="container" id="container">
+    Zmień kolor strony głównej: <input type="color" onchange="changeBackgroundColor(value)">
+
+    <% if (userName && userName !== 'Nieznajomy'){ %>
+        <h3>Dodaj nowy post</h3>
+        <form method="POST" action="addPost">
+            <label for="title">Tytuł:</label> <br>
+            <input type="text" name="title" id="title" required> <br>
+
+            <label for="content">Treść:</label> <br>
+            <textarea rows="4" cols="50" name="content" id="content" required></textarea> <br>
+            <button type="submit">Dodaj post</button>
+        </form>
+    <% } %>
+
+    <h3>Posty</h3>
+    <ul>
+        <% posts.forEach(post => { %>
+            <li><%= post.title %> - <%= post.nickname %><br><a href="post/<%= post.id %>">Więcej</a></li>
+        <% }) %>
+    </ul>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

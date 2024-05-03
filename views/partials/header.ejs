@@ -1,0 +1,15 @@
+<header class="site-header">
+    <h1 class="site-title">Blogownia</h1>
+    <p class="login-register">
+        <a href="/" class="home-link">
+            <span class="home-link-text">Strona Główna</span>
+        </a>
+        <% if (userName && userName !== 'Nieznajomy') { %>
+            <span class="welcome-message">Witaj, <%= userName %>!</span>
+            <a href="/logout" class="logout-link">Wyloguj</a>
+        <% } else {%>
+            <a href="/register" class="signup">Zarejestruj się</a>
+            <a href="/login" class="signin">Zaloguj się</a>
+        <% } %>
+    </p>
+</header>
