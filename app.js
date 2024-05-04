@@ -25,8 +25,10 @@ app.get('/', async (req, res) => {
 
 
     const success= req.query.success;
+    const theme = req.cookies['theme']
+    console.log(theme)
 
-    res.render('pages/index', { posts: posts, success: success, userName: getLoggedUsername(req) });
+    res.render('pages/index', { posts: posts, success: success, userName: getLoggedUsername(req), theme: getTheme(req) });
 });
 
 app.get('/register', async(req, res) => {
@@ -91,7 +93,7 @@ app.get('/post/:postId', async (req, res) => {
         .join('posts', 'comments.postId', '=', 'posts.id')
         .where('comments.postId', '=', postId)
 
-    res.render('pages/post', {post:post[0], userName: getLoggedUsername(req), comments: comments});
+    res.render('pages/post', {post:post[0], userName: getLoggedUsername(req), comments: comments, theme: getTheme(req)});
 });
 
 app.post('/post/:postId/addComment', async (req, res) => {
@@ -143,6 +145,21 @@ app.post('/addPost', async (req, res) => {
     res.redirect('/');
 });
 
+app.get('/changeTheme', async (req, res) => {
+    const username = getLoggedUsername(req);
+    const cookieValue = req.cookies['theme'];
+
+    if (cookieValue && cookieValue === "night") {
+        res.cookie('theme', 'day', { maxAge: 900000, httpOnly: true });
+    } else if(cookieValue && cookieValue === "day") {
+        res.cookie('theme', 'night', { maxAge: 900000, httpOnly: true });
+    } else {
+        res.cookie('theme', 'night', { maxAge: 900000, httpOnly: true });
+    }
+
+    res.redirect('/');
+});
+
 app.listen(3000, () => console.log('Server running on port 3000'));
 
 function getLoggedUsername(req) {
@@ -155,4 +172,8 @@ function getLoggedUsername(req) {
     }
 
     return userName
+}
+
+function getTheme(req) {
+    return req.cookies['theme'] || 'day'
 }

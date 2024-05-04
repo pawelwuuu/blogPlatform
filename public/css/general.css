@@ -67,14 +67,6 @@ body {
     padding: 20px;
 }
 
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
 .header {
     background-color: #007bff;
     color: #fff;
@@ -148,8 +140,7 @@ ul li a:hover {
     padding: 20px 0;
 }
 
-/* post_styles.css */
-
+/*post*/
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -246,7 +237,6 @@ form button:hover {
 .delete-post-btn button:hover {
     background-color: #c82333;
 }
-
 
 /* css/general.css */
 body {

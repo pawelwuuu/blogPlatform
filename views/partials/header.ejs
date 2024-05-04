@@ -11,5 +11,11 @@
             <a href="/register" class="signup">Zarejestruj się</a>
             <a href="/login" class="signin">Zaloguj się</a>
         <% } %>
+
+        <% if(theme =='day') { %>
+            <a href="/changeTheme" class="home-link">Tryb ciemny</a>
+        <% } else { %>
+            <a href="/changeTheme" class="home-link">Tryb jasny</a>
+        <%}%>
     </p>
 </header>

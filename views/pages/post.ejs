@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= post.title%></title>
-    <link rel="stylesheet" href="/css/general.css" type="text/css">
+    <% if(theme =='day') { %>
+        <link rel="stylesheet" href="../css/general.css" type="text/css">
+    <% } else { %>
+        <link rel="stylesheet" href="../css/general_night.css" type="text/css">
+    <%}%>
 </head>
 <body>
 <%- include('../partials/header') %>
